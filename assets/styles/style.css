@@ -1,0 +1,80 @@
+header{
+    background-color: rgb(123, 123, 153);
+}
+nav{
+    background-color: white;
+    min-height: 10vh;
+}
+
+.titulo{
+    min-height: 30vh;
+    background-image: url(../images/optional_banner_3.jpg);
+    object-fit: cover;
+    background-position: center;
+    color:white;
+    
+}
+.titulo>h1{
+    background-color: black;
+}
+
+main{
+    min-height: 60vh;
+}
+
+.small-td{
+    height: 2.5rem;
+}
+
+.tarjeta{
+    width: 20rem;
+    border-radius: 1rem 0 0 1rem;
+    height: 16rem;
+}
+
+.tarjeta-grande{
+    width: 40rem;
+    object-fit: contain;
+    height: 16rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    
+    
+}
+.elements{
+    line-height: 0.9rem;
+    padding-left: 1rem;
+}
+
+
+thead, td{
+    border: solid 1px black;
+}
+
+footer{
+    min-height: 10vh;
+}
+footer>p{
+    text-align: center;
+}
+footer img {
+    width: 2rem;
+}
+
+@media (max-width: 767px){
+    .tarjeta-grande{
+        height: 30rem;
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        border-radius: 1rem;
+        align-items: center;
+    }
+    .tarjeta-grande>img{
+        border-radius: 1rem 1rem 0 0;
+    }
+    .elements{
+        text-align: center;
+    }
+
+}
