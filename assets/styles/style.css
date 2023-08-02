@@ -41,6 +41,18 @@ main{
     
     
 }
+.card{
+    width: 18rem;
+    text-align: center;
+}
+.card-text{
+    text-align: center;
+    height: 5rem;
+}
+
+.first img{
+    height: 12rem;
+}
 .elements{
     line-height: 0.9rem;
     padding-left: 1rem;
