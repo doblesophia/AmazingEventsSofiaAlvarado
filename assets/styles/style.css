@@ -2,24 +2,32 @@ header{
     background-color: rgb(123, 123, 153);
 }
 nav{
-    background-color: white;
+    background-color: black;
     min-height: 10vh;
 }
+.navbar a{
+    color: white;
+}
 
+.navbar a:hover{
+    color:white
+}
 .titulo{
     min-height: 30vh;
     background-image: url(../images/optional_banner_3.jpg);
     object-fit: cover;
     background-position: center;
-    color:white;
+    color:black;
+    background-size: cover;
+    opacity: .7;
+    background-color: black;
     
 }
-.titulo>h1{
-    background-color: black;
-}
+
 
 main{
     min-height: 60vh;
+    margin-bottom: 3rem;
 }
 
 .small-td{
@@ -65,9 +73,11 @@ thead, td{
 
 footer{
     min-height: 10vh;
+    background-color: black;
 }
-footer>p{
+footer h5{
     text-align: center;
+    color: white;
 }
 footer img {
     width: 2rem;
