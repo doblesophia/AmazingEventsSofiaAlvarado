@@ -26,7 +26,6 @@ function filtrarEventos (eventos){
 }
 const pastEvents = filtrarEventos(data.events);
 
-console.log(pastEvents);
 
 
 function imprimirCartas ( eventos, cartas) {
