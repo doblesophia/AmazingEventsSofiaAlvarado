@@ -1,7 +1,6 @@
 const contenedorCartas = document.getElementById('cartas')
 
 function crearCartas(carta){
-
 return `<div class="card first">
 <img src="${carta.image}" class="card-img-top" alt="...">
 <section class="card-body">
@@ -17,12 +16,10 @@ return `<div class="card first">
 }
 
 function imprimirCartas (eventos, contenedorCartas){
-  contenedorCartas.innerHTML=""
- for (const evento of eventos) {
+  for (const evento of eventos) {
     const cartaHTML = crearCartas(evento);
-    contenedorCartas.innerHTML += cartaHTML;
+    contenedorCartas.innerHTML += cartaHTML
   }
-
 }
 
 imprimirCartas(data.events, contenedorCartas);
@@ -48,7 +45,6 @@ const arrayCategoriesNoRepetidas = Array.from(setCategoriesNoRepetidas)
 console.log(arrayCategoriesNoRepetidas)
 
 function imprimirCheckbox (contenedor, eventos) {
-  
   for (const evento of eventos) {
     const checkCreado = crearCheckbox(evento)
     contenedor.innerHTML += checkCreado
@@ -56,39 +52,29 @@ function imprimirCheckbox (contenedor, eventos) {
   }
 imprimirCheckbox(categorias, arrayCategoriesNoRepetidas);
 
-function filtrarCheckbox(arrayEvents){
-  const checkboxSeleccionados = document.querySelectorAll('input[type=checkbox]:checked')
-  const valoresCheckbox = Array.from(checkboxSeleccionados).map((input)=>input.value)
-  const filtrado = arrayEvents.filter((evento)=>valoresCheckbox.includes(evento.category))
-
-  return filtrado
-}
-
-categorias.addEventListener('change', ()=>{
-  const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
-  const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
-  imprimirCartas(filtradoPorCategoria, contenedorCartas)
-  
-})
 
 
-function filtrarPorNombre (){
-  const filtrado = data.events.filter((evento)=>evento.name.toLowerCase().includes(busqueda.value.toLowerCase()))
-  return filtrado
-}
+const checkfiltrado = function filtrarcheck (){
+  const checked = document.querySelectorAll('input[type=checkbox]:checked')
+  const arrayChecked = Array.from(checked).map(checkbox=>checkbox.value)
+  const arrayFiltrado = data.events.filter(evento=>arrayChecked.includes(evento.category))
+ console.log(arrayFiltrado)
+  return arrayFiltrado
+  }
+
+
+categorias.addEventListener('change', checkfiltrado)
 
 const busqueda = document.getElementById('busqueda')
-
+console.log(busqueda)
 busqueda.addEventListener('input', ()=>{
-  const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
-  const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
-  imprimirCartas(filtradoPorCategoria, contenedorCartas)
+  filtrarPorNombreEvento(data.events, busqueda.value)
 })
 
 
-
-
-
-
-
+function filtrarPorNombreEvento (){
+  let busquedaValue = busqueda.value
+  const filtrado = data.events.filter(evento=>evento.name.toLowerCase().includes(busquedaValue.toLowerCase()))
+  return filtrado
+}
 

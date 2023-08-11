@@ -4,19 +4,34 @@ console.log(data.events)
 console.log([window])
 const parametros = location.search;
 console.log(parametros)
-const objetoUrl = new URLSearchParams('parametros');
-console.log(objetoUrl.get('id'))
 
-const idEventos = objetoUrl.get('id');
+const objetoUrl = new URLSearchParams(parametros);
+console.log(objetoUrl)
+
+const idEventos = objetoUrl.get('_id');
 console.log(idEventos) 
-/*<img class="tarjeta" src="../images/cinema.jpg" alt="cinema">
-        <div class="elements">
-            <h6>Costume Party</h6>
-            <p>Date: 2024-02-12</p>
-            <p>Come in your scariest costume character to win amazing prizes.</p>
-            <p>Category: Costume party</p>
-            <p>Place: Room C</p>
-            <p>Capacity: 12.000</p>
-            <p>Estimate: 9.000</p>
-            <p>Price: 12</p>
-        </div> */
+
+const objetoEventos = data.events.find(objetoEventos => objetoEventos._id === idEventos)
+console.log(objetoEventos)
+
+function crearCards (eventos) {
+ return `<img class="tarjeta" src="${eventos.image}" alt="...">
+    <div class="elements">
+        <h6>${eventos.name}</h6>
+        <p>Date: ${eventos.date}</p>
+        <p>${eventos.description}</p>
+        <p>Category: ${eventos.category}</p>
+        <p>Place: ${eventos.place}</p>
+        <p>Capacity: ${eventos.capacity}</p>
+        <p>Price: $${eventos.price}</p>
+    </div>`
+        
+}
+ let estructuraString = crearCards(objetoEventos)
+ console.log(estructuraString)
+
+ function renderizarTarjeta (elementoHTML, estructuraString){
+    elementoHTML.innerHTML = estructuraString
+ }
+
+ renderizarTarjeta(contenedorDetails, estructuraString)

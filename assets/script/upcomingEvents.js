@@ -9,7 +9,7 @@ function crearCartas(carta){
       <p class="card-text">${carta.description}</p>
       <div class="d-flex justify-content-evenly">
         <p>Price: $${carta.price}</p>
-        <a href="../pages/details.html" class="btn btn-primary">Details</a>
+        <a href="../pages/details.html?_id=${carta._id}" class="btn btn-primary">Details</a>
       </div>
     </div>
 </section>`
