@@ -67,7 +67,7 @@ function filtrarCheckbox(arrayEvents){
 categorias.addEventListener('change', ()=>{
   const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
   const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
-  imprimirCartas(filtradoPorCategoria, contenedorCartas)
+  condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria)
   
 })
 
@@ -82,10 +82,24 @@ const busqueda = document.getElementById('busqueda')
 busqueda.addEventListener('input', ()=>{
   const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
   const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
-  imprimirCartas(filtradoPorCategoria, contenedorCartas)
+  condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria)
 })
 
 
+
+function condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria) {
+  if (filtradoPorNombre.length === data.events.length && filtradoPorCategoria.length === 0){
+      imprimirCartas(data.events, contenedorCartas)
+  } else if (filtradoPorNombre.length !== data.events.length && filtradoPorCategoria.length === 0){
+      imprimirCartas(filtradoPorNombre, contenedorCartas)
+      
+  } else if (filtradoPorCategoria.length !== 0 && filtradoPorNombre.length === data.events.length){
+      imprimirCartas(filtradoPorCategoria, contenedorCartas)
+     
+  }else if (filtradoPorNombre.length !== data.events.length && filtradoPorCategoria.length !== 0){
+      imprimirCartas(filtradoPorCategoria, contenedorCartas)
+  } 
+}
 
 
 
