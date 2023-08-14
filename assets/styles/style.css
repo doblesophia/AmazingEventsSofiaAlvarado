@@ -23,7 +23,9 @@ nav{
     background-color: black;
     
 }
-
+.img404{
+    width: 20rem;
+}
 
 main{
     min-height: 60vh;
@@ -100,3 +102,4 @@ footer img {
     }
 
 }
+

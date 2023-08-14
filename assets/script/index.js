@@ -1,4 +1,17 @@
 const contenedorCartas = document.getElementById('cartas')
+const categorias = document.getElementById('categorias')
+const busqueda = document.getElementById('busqueda')
+const imprimirMensaje = `
+
+<div class="d-flex flex-column align-items-center">
+<img class="img404" src="https://static.vecteezy.com/system/resources/previews/004/639/366/non_2x/error-404-not-found-text-design-vector.jpg">
+<h2>Oooops! you're wrong. Try with another words!</h2>
+</div>
+
+
+
+`
+
 
 function crearCartas(carta){
 
@@ -19,16 +32,13 @@ return `<div class="card first">
 function imprimirCartas (eventos, contenedorCartas){
   contenedorCartas.innerHTML=""
  for (const evento of eventos) {
-    const cartaHTML = crearCartas(evento);
+  const cartaHTML = crearCartas(evento);
     contenedorCartas.innerHTML += cartaHTML;
+    
   }
-
 }
 
 imprimirCartas(data.events, contenedorCartas);
-
-
-const categorias = document.getElementById('categorias')
 
 
 function crearCheckbox(categories){
@@ -38,14 +48,12 @@ function crearCheckbox(categories){
  </div>`
 }
 
-data.events.map((eventos)=>eventos.category)
 let categoriesRepetidas = data.events.map((eventos)=>eventos.category)
 
 const setCategoriesNoRepetidas = new Set(categoriesRepetidas)
-console.log(setCategoriesNoRepetidas)
 
 const arrayCategoriesNoRepetidas = Array.from(setCategoriesNoRepetidas)
-console.log(arrayCategoriesNoRepetidas)
+
 
 function imprimirCheckbox (contenedor, eventos) {
   
@@ -64,42 +72,45 @@ function filtrarCheckbox(arrayEvents){
   return filtrado
 }
 
-categorias.addEventListener('change', ()=>{
-  const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
-  const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
-  condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria)
-  
-})
-
-
 function filtrarPorNombre (){
   const filtrado = data.events.filter((evento)=>evento.name.toLowerCase().includes(busqueda.value.toLowerCase()))
   return filtrado
 }
 
-const busqueda = document.getElementById('busqueda')
-
-busqueda.addEventListener('input', ()=>{
-  const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
-  const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
-  condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria)
-})
-
-
+function imprimirMensajeH2(string) {  
+   
+  return contenedorCartas.innerHTML=string 
+} 
 
 function condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria) {
   if (filtradoPorNombre.length === data.events.length && filtradoPorCategoria.length === 0){
       imprimirCartas(data.events, contenedorCartas)
   } else if (filtradoPorNombre.length !== data.events.length && filtradoPorCategoria.length === 0){
-      imprimirCartas(filtradoPorNombre, contenedorCartas)
-      
+      if (filtradoPorNombre.length === 0 ) {
+        imprimirMensajeH2(imprimirMensaje)
+        return
+      }
+      imprimirCartas(filtradoPorNombre, contenedorCartas)  
   } else if (filtradoPorCategoria.length !== 0 && filtradoPorNombre.length === data.events.length){
       imprimirCartas(filtradoPorCategoria, contenedorCartas)
-     
   }else if (filtradoPorNombre.length !== data.events.length && filtradoPorCategoria.length !== 0){
-      imprimirCartas(filtradoPorCategoria, contenedorCartas)
-  } 
+      imprimirCartas(filtradoPorCategoria, contenedorCartas)   
+  }
 }
+
+categorias.addEventListener('change', ()=>{
+  const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
+  const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
+  condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria)
+})
+
+busqueda.addEventListener('input', ()=>{
+  const filtradoPorNombre = filtrarPorNombre(data.events, busqueda.value)
+  const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
+  condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria)
+  
+  
+})
 
 
 

@@ -1,4 +1,17 @@
 const contenedorCartas = document.getElementById('cartas')
+const categorias = document.getElementById('categorias')
+const busqueda = document.getElementById('busqueda')
+const imprimirMensaje = `
+
+<div class="d-flex flex-column align-items-center">
+<img class="img404" src="https://static.vecteezy.com/system/resources/previews/004/639/366/non_2x/error-404-not-found-text-design-vector.jpg">
+<h2>Oooops! you're wrong. Try with another words!</h2>
+</div>
+
+
+
+`
+
 
 
 function crearCartas(carta){
@@ -39,7 +52,6 @@ function imprimirCartas ( eventos, cartas) {
 }
 
 imprimirCartas(pastEvents, contenedorCartas);
-const categorias = document.getElementById('categorias')
 
 
 function crearCheckbox(categories){
@@ -75,6 +87,11 @@ function filtrarCheckbox(arrayEvents){
   return filtrado
 }
 
+function imprimirMensajeH2(string) {  
+   
+  return contenedorCartas.innerHTML=string 
+} 
+
 categorias.addEventListener('change', ()=>{
   const filtradoPorNombre = filtrarPorNombre(pastEvents, busqueda.value)
   const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
@@ -88,8 +105,6 @@ function filtrarPorNombre (){
   return filtrado
 }
 
-const busqueda = document.getElementById('busqueda')
-
 busqueda.addEventListener('input', ()=>{
   const filtradoPorNombre = filtrarPorNombre(pastEvents, busqueda.value)
   const filtradoPorCategoria = filtrarCheckbox(filtradoPorNombre)
@@ -100,8 +115,12 @@ function condicionalesCruzadas(filtradoPorNombre, filtradoPorCategoria) {
   if (filtradoPorNombre.length === data.events.length && filtradoPorCategoria.length === 0){
       imprimirCartas(data.events, contenedorCartas)
   } else if (filtradoPorNombre.length !== data.events.length && filtradoPorCategoria.length === 0){
-      imprimirCartas(filtradoPorNombre, contenedorCartas)
-      
+    if (filtradoPorNombre.length === 0 ) {
+      imprimirMensajeH2(imprimirMensaje)
+      return
+    }
+    imprimirCartas(filtradoPorNombre, contenedorCartas)
+
   } else if (filtradoPorCategoria.length !== 0 && filtradoPorNombre.length === data.events.length){
       imprimirCartas(filtradoPorCategoria, contenedorCartas)
      
