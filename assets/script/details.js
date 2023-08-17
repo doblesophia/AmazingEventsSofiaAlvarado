@@ -1,18 +1,23 @@
 let contenedorDetails = document.getElementById('contenedorDetails')
-console.log(data.events)
-
+console.log(contenedorDetails)
 console.log([window])
 const parametros = location.search;
-console.log(parametros)
 
-const objetoUrl = new URLSearchParams(parametros);
-console.log(objetoUrl)
 
-const idEventos = objetoUrl.get('_id');
-console.log(idEventos) 
 
-const objetoEventos = data.events.find(objetoEventos => objetoEventos._id === idEventos)
-console.log(objetoEventos)
+fetch("https://mindhub-xj03.onrender.com/api/amazing")
+.then(arregloEventosFetch=>arregloEventosFetch.json())
+.then(arregloEventosFetch=>{
+    let arrayEventos = arregloEventosFetch.events
+    const objetoUrl = new URLSearchParams(parametros);
+    const idEventos = objetoUrl.get('_id');
+    const objetoEventos = arrayEventos.find(objetoEventos => objetoEventos._id == idEventos)
+    console.log(objetoEventos)
+    let crearTarjetas = crearCards(objetoEventos)
+    renderizarTarjeta(contenedorDetails, crearTarjetas)
+    
+})
+
 
 function crearCards (eventos) {
  return `<img class="tarjeta" src="${eventos.image}" alt="...">
@@ -23,15 +28,12 @@ function crearCards (eventos) {
         <p>Category: ${eventos.category}</p>
         <p>Place: ${eventos.place}</p>
         <p>Capacity: ${eventos.capacity}</p>
+        <p><p>${eventos.assistance?(`Assistance: ${eventos.assistance}`):(`Estimate: ${eventos.estimate}`)}</p></p>
         <p>Price: $${eventos.price}</p>
     </div>`
         
 }
- let estructuraString = crearCards(objetoEventos)
- console.log(estructuraString)
 
  function renderizarTarjeta (elementoHTML, estructuraString){
     elementoHTML.innerHTML = estructuraString
  }
-
- renderizarTarjeta(contenedorDetails, estructuraString)
