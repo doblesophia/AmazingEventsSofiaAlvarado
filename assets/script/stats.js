@@ -6,6 +6,8 @@ const bodyTabla3 = document.getElementById('body3')
 fetch("https://mindhub-xj03.onrender.com/api/amazing")
 .then(arregloAssitance=>arregloAssitance.json())
 .then(eventos =>{
+    let eventosTodos = eventos.events
+    console.log(eventosTodos)
     let arrayEventosPorEstimado = eventos.events.filter(evento=>evento.estimate)
     const arrayEventosAsistencia = eventos.events.filter(evento=>evento.assistance)
     const arrayObjetoModificado = arrayEventosAsistencia.map((evento)=>
@@ -25,7 +27,8 @@ fetch("https://mindhub-xj03.onrender.com/api/amazing")
    console.log(eventoMayorPorcentaje)
    const eventoMenorPorcentaje = arrayOrdenadosPorcentajesDeMayorAMenor.slice(-1)
    console.log(eventoMenorPorcentaje)
-   const eventoOrdenadoMayorAMenorCapacidad = arrayObjetoModificado.sort(compararValores)
+
+   const eventoOrdenadoMayorAMenorCapacidad = eventosTodos.sort(compararValores)
    const eventoMayorCapacidad = eventoOrdenadoMayorAMenorCapacidad.slice(0,1)
    const estructuraHTML = crearTabla1(eventoMayorPorcentaje, eventoMenorPorcentaje, eventoMayorCapacidad)
 
